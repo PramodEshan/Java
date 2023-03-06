@@ -1,45 +1,33 @@
 package org;
 
-import java.util.Scanner;
+import java.util.List;
 
-public class ascending {
+public class functional {
 
-    public static void reformatfile()
-    {
-        readCsvFile readcsv = new readCsvFile();
-        int[] number=readcsv.read();
-        ascendingnum(number);
+    public List<Integer> sortData() {
+        return ascendingNum(readData());
+    }
+
+    private List<Integer> readData(){
+        readCsvFile readCsvFile = new readCsvFile();
+        return readCsvFile.read();
 
     }
 
-    public static void ascendingnum(int num[9])
-    {
-        int n;
-        for (int i=0;i<10)
-        {
-            for(int j=i+1;j<10;j++)
+    private List<Integer> ascendingNum(List<Integer> num) {
+        List<Integer> numbers;
+        numbers = num;
+        for (int i=0;i<num.size();i++) {
+            for(int j=i+1;j<num.size();j++)
             {
-                if(num[i]>num[j])
-                {
-                    n=num[j+1];
-                    num[j+1]=num[i];
-                    num[i]=n;
-                    i=0;
-                }
+                 if(numbers.get(i)<numbers.get(j)){
+                     int x=numbers.get(i);
+                     numbers.add(i,numbers.get(j));
+                     numbers.add(j,x);
+                 }
             }
         }
-    }
-    public static void read()
-    {
-        int numbers[9],i=0;
-        Scanner csv = new Scanner(new File("Book01.csv"));
-        csv.useDelimiter(",");
-        while (csv.hasNext())
-        {
-            numbers[i]=csv.next();
-            i++;
-        }
-        sc.close();
         return numbers;
     }
+
 }

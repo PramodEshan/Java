@@ -1,18 +1,24 @@
 package org;
-
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class readCsvFile {
-    public static void read()
-    {
-        int numbers[9],i=0;
-        Scanner csv = new Scanner(new File("Book01.csv"));
-        csv.useDelimiter(",");
-        while (csv.hasNext())
-            {
-                numbers[i]=csv.next();
+    protected List<Integer> read() {
+        List<Integer> numbers=new ArrayList<>();
+        int i=0;
+        try {
+            Scanner csv = new Scanner(new File(System.getProperty("user.dir")+"/src/main/java/org/Book1.csv"));
+            Scanner data = csv.useDelimiter(";|\r?\n|\r");
+            while (data.hasNext()) {
+                numbers.add(i, Integer.valueOf(data.next()));
                 i++;
             }
-        sc.close();
+            csv.close();
+        } catch (Exception e) {
+            //TODO add a logger
+        }
+        return numbers;
     }
 }
